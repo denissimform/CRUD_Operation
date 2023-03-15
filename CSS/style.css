@@ -1,0 +1,41 @@
+@import url(./bootstrapV5.3.0.min.css);
+
+.bg-red {
+    background-color: #ad4b56;
+}
+
+.form-header {
+    display: flex;
+    justify-content: end;
+    color: white;
+}
+
+.input-group-text {
+    background-color: unset !important;
+    border-right: none !important;
+}
+
+.form-control {
+    border-left: none !important;
+}
+
+.invalid-feedback {
+    margin-left: 5px;
+}
+
+.is-invalid {
+    border: 1px solid #dc3545 !important;
+    border-left: 0 !important;
+}
+
+.input-group:has(.input-group-text~.is-invalid) .input-group-text {
+    border: 1px solid #dc3545 !important;
+    border-right: 0 !important;
+}
+
+.records{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
