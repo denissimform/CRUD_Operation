@@ -8,18 +8,28 @@
 
     <!-- CSS file -->
     <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/style.css">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <h1 class="text-center">User Data Management</h1>
-        <div class="add-div w-75 m-auto">
-            <a class="btn btn-success w-100 text-decoration-none text-white" id="addPerson" href="./input.html" role="button">Add Record</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <h1 class="text-center">User Data Management</h1>
+            <div class="float-end mx-5 px-5 border-start">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item" id="">
+                        <a class="nav-link text-black" id="home">Home</a>
+                    </li>
+                    <li class="nav-item" id="">
+                        <a class="nav-link text-black" id="add-record">Add Record</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <hr>
-        <div class="records" id="records">
-            
-        </div>
+    </nav>
+
+    <div class="container-fluid p-5">
+        <div class="body-section" id="body-section"> </div>
     </div>
 
     <!-- JS file -->
