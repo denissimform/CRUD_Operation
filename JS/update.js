@@ -356,7 +356,7 @@ const checkRelation = (event) => {
 }
 getEle('relation').addEventListener('input', checkRelation);
 
-const submitForm = () => {
+const updateData = () => {
     data.name = document.getElementById('name');
     data.office = document.getElementById('office-address');
     data.resident = document.getElementById('residence-address');
@@ -406,36 +406,67 @@ const submitForm = () => {
     }
 
     if (flag) {
-        localData.name = data.name.value;
-        localData.office = data.office.value;
-        localData.resident = data.resident.value;
-        localData.mobile = data.mobile.value;
-        localData.telephone = data.telephone.value;
-        localData.email = data.email.value;
-        localData.aadharNo = data.aadharNo.value;
-        localData.gstin = data.gstin.value;
-        localData.vehicleNo = data.vehicleNo.value;
-        localData.dlNo = data.dlNo.value;
-        localData.bankName = data.bankName.value;
-        localData.accountNo = data.accountNo.value;
-        localData.debitCardNo = data.debitCardNo.value;
-        localData.creditCardNo = data.creditCardNo.value;
-        localData.passportNo = data.passportNo.value;
-        localData.panNo = data.panNo.value;
-        localData.bloodGroup = data.bloodGroup.value;
-        localData.favColor = data.favColor.value;
-        localData.gender = gender.value;
-        localData.language = [];
+        const user = JSON.parse(localStorage.getItem(id));
+        user.name = data.name.value;
+        user.office = data.office.value;
+        user.resident = data.resident.value;
+        user.mobile = data.mobile.value;
+        user.telephone = data.telephone.value;
+        user.email = data.email.value;
+        user.aadharNo = data.aadharNo.value;
+        user.gstin = data.gstin.value;
+        user.vehicleNo = data.vehicleNo.value;
+        user.dlNo = data.dlNo.value;
+        user.bankName = data.bankName.value;
+        user.accountNo = data.accountNo.value;
+        user.debitCardNo = data.debitCardNo.value;
+        user.creditCardNo = data.creditCardNo.value;
+        user.passportNo = data.passportNo.value;
+        user.panNo = data.panNo.value;
+        user.bloodGroup = data.bloodGroup.value;
+        user.favColor = data.favColor.value;
+        user.gender = gender.value;
+        user.language = [];
         language.forEach((ele) => {
-            localData.language.push(ele.value);
+            user.language.push(ele.value);
         });
-        localData.dob = data.dob.value;
-        localData.name1 = data.name1.value;
-        localData.mobileNo1 = data.mobileNo1.value;
-        localData.telephoneNo1 = data.telephoneNo1.value;
-        localData.relation = data.relation.value;
-        localStorage.setItem(new Date().getTime(), JSON.stringify(localData));
+        user.dob = data.dob.value;
+        user.name1 = data.name1.value;
+        user.mobileNo1 = data.mobileNo1.value;
+        user.telephoneNo1 = data.telephoneNo1.value;
+        user.relation = data.relation.value;
+        localStorage.setItem(id, JSON.stringify(user));
         homeContent();
     }
 }
-document.getElementById('form-submit-btn').addEventListener('click', submitForm);
+document.getElementById('form-update-btn').addEventListener('click', updateData);
+
+/************** Assign value to element ************/
+document.getElementById('name').value = user.name;
+document.getElementById('office-address').value = user.office;
+document.getElementById('residence-address').value = user.resident;
+document.getElementById('mobile').value = user.mobile;
+document.getElementById('telephone').value = user.telephone;
+document.getElementById('email').value = user.email;
+document.getElementById('aadhar-no').value = user.aadharNo;
+document.getElementById('gstin').value = user.gstin;
+document.getElementById('vehicle-no').value = user.vehicleNo;
+document.getElementById('dl-no').value = user.dlNo;
+document.getElementById('bank-name').value = user.bankName;
+document.getElementById('account-no').value = user.accountNo;
+document.getElementById('debit-card-no').value = user.debitCardNo;
+document.getElementById('credit-card-no').value = user.creditCardNo;
+document.getElementById('passport-no').value = user.passportNo;
+document.getElementById('pan-no').value = user.panNo;
+document.getElementById('blood-group').value = user.bloodGroup;
+document.getElementById('fav-color').value = user.favColor;
+document.querySelector(`input[name=gender][value=${user.gender}`).setAttribute('checked', true);
+document.querySelectorAll('input[name=language]').forEach((ele => {
+    if (user.language.includes(ele.value))
+        ele.setAttribute('checked', true);
+}));
+document.getElementById('dob').value = user.dob;
+document.getElementById('name1').value = user.name1;
+document.getElementById('mobile1').value = user.mobileNo1;
+document.getElementById('telephone1').value = user.telephoneNo1;
+document.getElementById('relation').value = user.relation;
