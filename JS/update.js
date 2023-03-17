@@ -4,7 +4,7 @@ const localData = {};
 const isEmail = /[a-zA-Z][a-zA-Z0-9.]*@([a-z]+).([a-z]{2,8})(.[a-z]{2,8})/g;
 const isAddress = /[a-zA-Z0-9][a-zA-Z0-9.\-,\s]*/g;
 const onlyNumber = /[0-9]*/g;
-let profileImage = "";
+let profileImage = user.profileImage;
 
 const getEle = (id) => {
     return document.getElementById(id);
