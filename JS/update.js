@@ -4,6 +4,7 @@ const localData = {};
 const isEmail = /[a-zA-Z][a-zA-Z0-9.]*@([a-z]+).([a-z]{2,8})(.[a-z]{2,8})/g;
 const isAddress = /[a-zA-Z0-9][a-zA-Z0-9.\-,\s]*/g;
 const onlyNumber = /[0-9]*/g;
+let profileImage = "";
 
 const getEle = (id) => {
     return document.getElementById(id);
@@ -338,6 +339,46 @@ checkBox.forEach((ele) => {
     ele.addEventListener('change', checkLanguage);
 });
 
+const checkProfilePic = (event) => {
+    const pic = event.target.files[0];
+    const picErr = document.getElementById(`invalid-${event.target.id}`);
+    const extension = pic.name.split('.').pop();
+    const picPre = document.getElementById('profile-pic-preview');
+    if (event.target.files.length === 0) {
+        picErr.innerHTML = "Please! Fill out this field!!";
+        event.target.classList.add('is-invalid');
+        picPre.classList.add('d-none');
+        flag = false;
+    } else if (!['png', 'jpg', 'jpeg'].includes(extension)) {
+        picErr.innerHTML = "Please! Choose jpg, jpeg or png extension image!!";
+        event.target.classList.add('is-invalid');
+        picPre.classList.add('d-none');
+        event.target.value = "";
+        flag = false;
+    } else if (pic.size > 2000000) {
+        picErr.innerHTML = "Please! Choose an image less than 2 mb!!";
+        event.target.classList.add('is-invalid');
+        picPre.classList.add('d-none');
+        event.target.value = "";
+        flag = false;
+    } else {
+        picErr.innerHTML = "";
+        event.target.classList.remove('is-invalid');
+        /**************** Image processing ***************/
+        const reader = new FileReader();
+
+        reader.onloadend = (e) => {
+            profileImage = e.target.result;
+            picPre.src = profileImage;
+            picPre.classList.remove('d-none');
+        }
+
+        reader.readAsDataURL(pic);
+        flag = true;
+    }
+}
+document.getElementById('profile-pic').addEventListener('change', checkProfilePic);
+
 const checkRelation = (event) => {
     const err = getEle('invalid-relation');
     err.innerText = "";
@@ -378,6 +419,7 @@ const updateData = () => {
     let gender = document.querySelector('input[name=gender]:checked');
     let language = document.querySelectorAll('input[name=language]:checked');
     data.dob = document.getElementById('dob');
+    let pic = document.getElementById('profile-pic');
     data.name1 = document.getElementById('name1');
     data.mobileNo1 = document.getElementById('mobile1');
     data.telephoneNo1 = document.getElementById('telephone1');
@@ -405,6 +447,11 @@ const updateData = () => {
         flag = false;
     }
 
+    if (pic.files.length === 0) {
+        document.getElementById('invalid-profile-pic').innerHTML = "Please! Fill out this field!!";
+        pic.classList.add('is-invalid');
+    }
+
     if (flag) {
         const user = JSON.parse(localStorage.getItem(id));
         user.name = data.name.value;
@@ -430,6 +477,7 @@ const updateData = () => {
         language.forEach((ele) => {
             user.language.push(ele.value);
         });
+        user.profileImage = profileImage;
         user.dob = data.dob.value;
         user.name1 = data.name1.value;
         user.mobileNo1 = data.mobileNo1.value;
@@ -466,6 +514,7 @@ document.querySelectorAll('input[name=language]').forEach((ele => {
         ele.setAttribute('checked', true);
 }));
 document.getElementById('dob').value = user.dob;
+document.getElementById('profile-pic-preview').src = user.profileImage;
 document.getElementById('name1').value = user.name1;
 document.getElementById('mobile1').value = user.mobileNo1;
 document.getElementById('telephone1').value = user.telephoneNo1;

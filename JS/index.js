@@ -45,6 +45,7 @@ const viewContent = (event) => {
                     ele.setAttribute('checked', true);
             }));
             document.getElementById('dob').value = user.dob;
+            document.getElementById('profile-pic-preview').src = user.profileImage;
             document.getElementById('name1').value = user.name1;
             document.getElementById('mobile1').value = user.mobileNo1;
             document.getElementById('telephone1').value = user.telephoneNo1;
@@ -103,7 +104,7 @@ const homeContent = () => {
         data = JSON.parse(data);
         bodySection.innerHTML += `
             <div class="card mx-2">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="Profile image">
+                <img src='${data.profileImage}' class="card-img-top" alt="Profile image">
                 <div class="card-body">
                     <h5 class="card-title">${data.name}</h5>
                     <p class="card-text">${data.mobile}</p>
