@@ -1,0 +1,29 @@
+@import url(./bootstrapV5.3.0.min.css);
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&family=Roboto&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-family: 'Tilt Neon', cursive;
+}
+
+.nav-link {
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.navbar .container-fluid {
+    justify-content: unset !important;
+}
+
+.body-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 18rem !important;
+}
